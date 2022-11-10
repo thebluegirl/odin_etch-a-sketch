@@ -4,16 +4,23 @@
     box-sizing: border-box;
 }
 
-.container {
+#container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.grid-column {
+.grid-row {
     display: flex;
+    flex-direction: column;
     border: 1px solid black;
     min-height: 50px;
     max-width: 50px;
 }
 
+.grid-cells {
+    display: flex;
+    border: 1px solid black;
+    min-height: 50px;
+    min-width: 50px;
+}

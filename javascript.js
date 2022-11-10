@@ -1,34 +1,35 @@
 //Take control of HTML elements
 const container = document.getElementById('container');
-const columnCells = document.getElementsByClassName('grid-column')
+const rows = document.getElementsByClassName('grid-row')
 
-let column;
-let rows;
+let row;
+let cells;
 
 function makeGrid() {
-    makeColumn(16);
-    makeRows(16);
+    makeRow(16);
+    makeCells(16);
 }
 
-function makeColumn(num) {
+function makeRow(num) {
    for (let i = 0; i < num; i++){
-    column = document.createElement('div');
-    column.setAttribute('class', 'grid-column');
-    column.setAttribute('id', `grid-column-${i}`);
-    container.appendChild(column);
+    row = document.createElement('div');
+    row.setAttribute('class', 'grid-row');
+    row.setAttribute('id', `grid-row-${i}`);
+    container.appendChild(row);
    }
 }
 
-/* function makeRows(num){
-    for (let i = 0; i < Array.from(columnCells).length; i++){
+function makeCells(num){
+    for (let i = 0; i < Array.from(rows).length; i++){
         for (let j = 0; j < num; j++){
-            rows = document.createElement('div');
-            rows.setAttribute('class', 'grid-rows');
-            rows.setAttribute('id', `grid-row-${j}`);
-            column[j].appendChild(rows)
+            cells = document.createElement('div');
+            cells.setAttribute('class', 'grid-cells');
+            // cells.setAttribute('id', `grid-cell-${i}-${j}`);
+            let columns = document.getElementById(`grid-row-${j}`)
+            columns.appendChild(cells);
         }
     }
-} */
+}
 
 
 makeGrid();
