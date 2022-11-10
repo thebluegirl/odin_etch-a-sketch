@@ -9,3 +9,11 @@
     align-items: center;
     justify-content: center;
 }
+
+.grid-column {
+    display: flex;
+    border: 1px solid black;
+    min-height: 50px;
+    max-width: 50px;
+}
+
