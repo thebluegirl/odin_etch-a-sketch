@@ -1,18 +1,16 @@
 //Take control of HTML elements
 const container = document.getElementById('container');
-const rows = document.getElementsByClassName('grid-row')
-const rowsStyle = rows.style;
-const allCells = document.getElementsByClassName('grid-cells');
-const allCellsStyle = allCells.style
+const rows = document.getElementsByClassName('grid-row');
+const gridSizeButton = document.getElementById('grid-size-button');
+const resetGrid = document.getElementById('reset-grid');
 
 let row;
 let cells;
-
-Array.from(allCells).forEach(eachCell => changeColor())
+let num = 16;
 
 function makeGrid() {
-    makeRow(16);
-    makeCells(16);
+    makeRow(num);
+    makeCells(num);
 }
 
 function makeRow(num) {
@@ -39,13 +37,28 @@ function makeCells(num){
     }
 }
 
-
 makeGrid();
 
-function changeColor() {
-    eachCell.addEventListener('mouseover', e => {
-        console.log('render');
-        e.target.classList.add('black');
-    })
-}
+gridSizeButton.addEventListener('click', e => {
+    let cellNum = +prompt('How many cells would you like your grid to have?');
 
+    if (cellNum > 100) {
+        cellNum = +prompt('The maximum limit is 100. Please enter a lower number.');
+        cellNum;
+    } else if (cellNum < 10) {
+       cellNum = +prompt('The minimum limit is 10. Please enter a higher number');
+        cellNum;
+    } else if (Number.isInteger(cellNum) === false) {
+        cellNum = +prompt('Please enter a number between 10 and 100 in digits')
+        cellNum;
+    } else {
+        container.innerHTML = '';
+        num = cellNum;
+        makeGrid();
+    }
+})
+
+resetGrid.addEventListener('click', e => {
+    container.innerText = ``;
+    makeGrid();
+})

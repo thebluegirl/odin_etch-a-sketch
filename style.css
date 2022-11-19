@@ -10,6 +10,18 @@
     justify-content: center;
 }
 
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+button{
+    padding: 5px 10px;
+}
+
 .grid-row {
     display: flex;
     flex-direction: column;
