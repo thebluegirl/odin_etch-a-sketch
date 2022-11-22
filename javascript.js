@@ -3,6 +3,7 @@ const container = document.getElementById('container');
 const rows = document.getElementsByClassName('grid-row');
 const gridSizeButton = document.getElementById('grid-size-button');
 const resetGrid = document.getElementById('reset-grid');
+const sketchPadSize = 500;
 
 let row;
 let cells;
@@ -18,6 +19,7 @@ function makeRow(num) {
     row = document.createElement('div');
     row.setAttribute('class', 'grid-row');
     row.setAttribute('id', `grid-row-${i}`);
+    row.style.width = `${sketchPadSize / num}px`
     container.appendChild(row);
    }
 }
@@ -28,6 +30,7 @@ function makeCells(num){
             cells = document.createElement('div');
             cells.setAttribute('class', 'grid-cells');
             cells.setAttribute('id', `grid-cell-${j}-${i}`);
+            cells.style.height = `${sketchPadSize / num}px`;
             let columns = document.getElementById(`grid-row-${j}`)
             columns.appendChild(cells);
             cells.addEventListener('mouseover', e => {
@@ -45,8 +48,8 @@ gridSizeButton.addEventListener('click', e => {
     if (cellNum > 100) {
         cellNum = +prompt('The maximum limit is 100. Please enter a lower number.');
         cellNum;
-    } else if (cellNum < 10) {
-       cellNum = +prompt('The minimum limit is 10. Please enter a higher number');
+    } else if (cellNum < 1) {
+       cellNum = +prompt('The minimum limit is 1, although we recommend at least 4. Please enter a higher number');
         cellNum;
     } else if (Number.isInteger(cellNum) === false) {
         cellNum = +prompt('Please enter a number between 10 and 100 in digits')

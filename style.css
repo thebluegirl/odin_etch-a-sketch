@@ -6,8 +6,10 @@
 
 #container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 500px;
+    max-width: 500px;
 }
 
 .buttons {
@@ -25,16 +27,22 @@ button{
 .grid-row {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
-    min-height: 30px;
-    max-width: 30px;
+    /* This is to limit what additional borders contribute to total size */
+    border-left: 1px solid black;
 }
 
 .grid-cells {
     display: flex;
-    border: 1px solid black;
-    min-height: 30px;
-    min-width: 30px;
+    /* This has been done in this manner to limit what additional borders contribute to total size */
+    border-bottom: 1px solid black;
+}
+
+.grid-row :first-child {
+    border-top: 1px solid black;
+}
+
+.grid-row:last-of-type {
+    border-right: 1px solid black;
 }
 
 .black {
