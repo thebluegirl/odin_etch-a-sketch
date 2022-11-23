@@ -4,10 +4,14 @@ const rows = document.getElementsByClassName('grid-row');
 const gridSizeButton = document.getElementById('grid-size-button');
 const resetGrid = document.getElementById('reset-grid');
 const sketchPadSize = 500;
+const randomColourPen = document.getElementById('random-colour-pen');
+const blackPen = document.getElementById('black-pen');
 
 let row;
 let cells;
 let num = 16;
+let isRandomColour = true;
+let isBlack = false;
 
 function makeGrid() {
     makeRow(num);
@@ -34,7 +38,11 @@ function makeCells(num){
             let columns = document.getElementById(`grid-row-${j}`)
             columns.appendChild(cells);
             cells.addEventListener('mouseover', e => {
-                e.target.classList.add('black');
+                if (isBlack) {
+                    e.target.style.backgroundColor = 'black'
+                } else if (isRandomColour) { 
+                    e.target.style.backgroundColor = randomColorGenerator();
+                }
             })
         }
     }
@@ -43,16 +51,16 @@ function makeCells(num){
 makeGrid();
 
 gridSizeButton.addEventListener('click', e => {
-    let cellNum = +prompt('How many cells would you like your grid to have?');
+    let cellNum = +prompt('Please type in your preferred grid dimension');
 
     if (cellNum > 100) {
         cellNum = +prompt('The maximum limit is 100. Please enter a lower number.');
         cellNum;
     } else if (cellNum < 1) {
-       cellNum = +prompt('The minimum limit is 1, although we recommend at least 4. Please enter a higher number');
+       cellNum = +prompt('The minimum limit is 1. Please enter a higher number');
         cellNum;
     } else if (Number.isInteger(cellNum) === false) {
-        cellNum = +prompt('Please enter a number between 10 and 100 in digits')
+        cellNum = +prompt('Please enter a number between 1 and 100 in digits')
         cellNum;
     } else {
         container.innerHTML = '';
@@ -64,4 +72,22 @@ gridSizeButton.addEventListener('click', e => {
 resetGrid.addEventListener('click', e => {
     container.innerText = ``;
     makeGrid();
+})
+
+function randomColorGenerator() {
+    let r = Math.floor((Math.random() * 255) + 1);
+    let g = Math.floor((Math.random() * 255) + 1);
+    let b = Math.floor((Math.random() * 255) + 1);
+    let randomColor = `rgb(${r}, ${g}, ${b})`;
+    return randomColor;
+}
+
+randomColourPen.addEventListener('click', (e) => {
+    isRandomColour = true;
+    isBlack = false;
+})
+
+blackPen.addEventListener('click', (e) => {
+    isRandomColour = false;
+    isBlack = true;
 })
